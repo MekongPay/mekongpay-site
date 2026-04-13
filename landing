@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MekongPay — One API for every QR payment on earth</title>
+<meta name="description" content="Connect your platform to domestic QR payment rails across Southeast Asia and beyond. Cards in, stablecoins in — local QR out. Full regulatory compliance.">
+<meta property="og:title" content="MekongPay — QR Payment Infrastructure">
+<meta property="og:description" content="One API for every QR payment on earth. Cards in, stablecoins in — local QR out.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--indigo:#6366f1;--indigo-light:#818cf8;--indigo-dark:#4f46e5;--bg:#0a0a0a;--white:#fff;--gray:#a1a1aa;--gray-dark:#71717a;--gray-darker:#52525b;--border:#1e293b}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--white);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding-left:32px;padding-right:32px}
+.wrap-sm{max-width:800px;margin:0 auto;padding-left:32px;padding-right:32px}
+.wrap-xs{max-width:600px;margin:0 auto;padding-left:32px;padding-right:32px}
+.center{text-align:center}
+.flex{display:flex;flex-wrap:wrap}
+.gap-12{gap:12px}
+.gap-16{gap:16px}
+.gap-20{gap:20px}
+.justify-center{justify-content:center}
+.justify-between{justify-content:space-between}
+.align-center{align-items:center}
+.col{flex-direction:column}
+
+nav{padding:20px 0}
+nav a.btn{padding:8px 20px;border-radius:8px;background:var(--indigo);color:var(--white);font-size:14px;font-weight:600}
+
+.label{font-size:12px;letter-spacing:4px;color:var(--indigo);font-weight:600;margin-bottom:12px;text-transform:uppercase}
+h1{font-size:clamp(42px,7vw,80px);font-weight:800;line-height:1.05;letter-spacing:-3px;margin-bottom:24px}
+h2{font-size:clamp(28px,4vw,36px);font-weight:700;letter-spacing:-1px;margin-bottom:20px}
+.accent{color:var(--indigo-light)}
+.sub{font-size:18px;color:var(--gray);line-height:1.7;font-weight:300;max-width:540px;margin:0 auto 36px}
+.body{font-size:16px;color:var(--gray);line-height:1.7}
+
+.pill{padding:6px 16px;border-radius:20px;font-size:13px;font-weight:500;border:1px solid rgba(99,102,241,0.3);background:rgba(99,102,241,0.06);color:var(--indigo-light);white-space:nowrap}
+.card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:14px;padding:28px;flex:1 1 240px;min-width:220px}
+.card-api{background:rgba(99,102,241,0.04);border:1px solid rgba(99,102,241,0.25);border-radius:16px;padding:32px;max-width:640px;margin:0 auto}
+.card h3{color:var(--white);font-weight:600;font-size:17px;margin-bottom:8px}
+.card p,.card-api p{color:var(--gray-dark);font-size:14px;line-height:1.6}
+.card-icon{font-size:28px;margin-bottom:14px}
+
+.step-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#000;margin-bottom:16px;flex-shrink:0}
+
+.code-block{max-width:640px;margin:36px auto 0;background:#0d0d14;border:1px solid var(--border);border-radius:14px;padding:24px 28px;font-family:'SF Mono','Fira Code',monospace;font-size:14px;line-height:1.8;overflow-x:auto}
+.c-purple{color:#c084fc}.c-text{color:#e2e8f0}.c-dim{color:var(--gray-dark)}.c-cyan{color:#67e8f9}.c-green{color:#86efac}.c-yellow{color:#fde68a}.c-red{color:#fca5a5}.c-blue{color:#93c5fd}
+
+.feat{font-size:15px;color:var(--indigo-light);margin-bottom:10px}
+
+input[type="email"]{flex:1 1 240px;padding:14px 18px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--white);font-size:15px;outline:none;font-family:inherit}
+input[type="email"]::placeholder{color:var(--gray-darker)}
+.btn-primary{padding:14px 28px;border-radius:10px;background:var(--indigo);color:var(--white);font-size:15px;font-weight:600;border:none;cursor:pointer;white-space:nowrap;font-family:inherit}
+.btn-primary:hover{background:var(--indigo-dark)}
+
+.vision-badge{padding:3px 10px;border-radius:4px;font-size:11px;font-weight:800;color:#000;letter-spacing:1px}
+.vision-card{padding:14px 24px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border);display:flex;gap:12px;align-items:center}
+
+.divider{border-top:1px solid var(--border)}
+
+.success-msg{padding:14px 28px;border-radius:10px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:#86efac;font-size:15px;font-weight:500;display:none}
+
+section{padding:80px 0}
+
+@media(max-width:1024px){
+  .card{min-width:calc(50% - 16px)}
+}
+@media(max-width:768px){
+  .wrap,.wrap-sm,.wrap-xs{padding-left:24px;padding-right:24px}
+  section{padding:60px 0}
+  h1{font-size:clamp(36px,8vw,52px);letter-spacing:-2px}
+  h2{font-size:clamp(24px,5vw,32px)}
+  .sub{font-size:16px;margin-bottom:28px}
+  .card{min-width:100%}
+  .card-api{padding:24px}
+  .code-block{padding:18px 20px;font-size:13px}
+  .vision-card{padding:12px 18px}
+  .flex.gap-16{gap:12px}
+  .flex.gap-20{gap:12px}
+  nav .btn{padding:6px 14px;font-size:13px}
+}
+@media(max-width:480px){
+  .wrap,.wrap-sm,.wrap-xs{padding-left:16px;padding-right:16px}
+  section{padding:48px 0}
+  h1{font-size:32px;letter-spacing:-1.5px}
+  h2{font-size:24px}
+  .sub{font-size:15px}
+  .pill{font-size:12px;padding:5px 12px}
+  #register{flex-direction:column}
+  #register input[type="email"]{width:100%}
+  .btn-primary{width:100%;text-align:center}
+  .code-block{font-size:12px;padding:16px;border-radius:10px}
+  .code-block div[style*="padding-left"]{padding-left:16px!important}
+  .vision-card{flex:1 1 100%}
+  .feat{font-size:14px}
+  nav{padding:12px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<div class="wrap">
+<nav class="flex justify-between align-center">
+  <div class="flex align-center" style="gap:10px">
+    <svg width="36" height="36" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#6366f1"/><path d="M20 76 Q32 40 50 52 Q68 64 80 24" stroke="#fff" stroke-width="4.5" fill="none" stroke-linecap="round"/><circle cx="20" cy="76" r="5" fill="rgba(255,255,255,0.5)"/><circle cx="50" cy="52" r="5" fill="rgba(255,255,255,0.5)"/><circle cx="80" cy="24" r="5" fill="rgba(255,255,255,0.5)"/><line x1="16" y1="84" x2="84" y2="84" stroke="rgba(255,255,255,0.2)" stroke-width="2"/></svg>
+    <span style="font-size:20px;font-weight:600;letter-spacing:-0.5px"><span style="color:#fff">Mekong</span><span style="color:#818cf8">Pay</span></span>
+  </div>
+  <a href="#register" class="btn">Register interest</a>
+</nav>
+</div>
+
+<!-- Hero -->
+<section style="padding-top:100px;padding-bottom:60px">
+<div class="wrap center flex col align-center">
+  <h1>One API for every<br><span class="accent">QR payment</span> on earth</h1>
+  <p class="sub">Connect your platform to domestic QR payment rails across Southeast Asia and beyond. Cards in, stablecoins in — local QR out. Full regulatory compliance.</p>
+  <div class="flex gap-12 justify-center" style="margin-bottom:48px;flex-wrap:wrap">
+    <span class="pill">PromptPay</span>
+    <span class="pill">VietQR</span>
+    <span class="pill">KHQR</span>
+    <span class="pill">LaoQR</span>
+    <span class="pill">USDC / USDT</span>
+    <span class="pill">Visa / MC</span>
+  </div>
+  <div class="flex gap-12 justify-center" style="max-width:500px;width:100%" id="register">
+    <input type="email" id="email-input" placeholder="you@company.com">
+    <button class="btn-primary" id="register-btn">Register early interest</button>
+  </div>
+  <div class="success-msg" id="success-msg">You're on the list. We'll be in touch soon.</div>
+</div>
+</section>
+
+<!-- How it works -->
+<section>
+<div class="wrap">
+  <div class="center" style="margin-bottom:48px">
+    <div class="label">How it works</div>
+    <h2>Scan. Pay. <span class="accent">Done.</span></h2>
+  </div>
+  <div class="flex gap-16 justify-center">
+    <div class="card">
+      <div class="step-num" style="background:#f59e0b">1</div>
+      <h3>User scans QR</h3>
+      <p>A user on your platform scans any local merchant QR code — PromptPay, VietQR, KHQR, LaoQR — through your app via MekongPay's API.</p>
+    </div>
+    <div class="card">
+      <div class="step-num" style="background:#6366f1">2</div>
+      <h3>We bridge the payment</h3>
+      <p>MekongPay debits the user's linked card, bank account, or stablecoin wallet. Converts currency instantly. Routes through fully regulated local rails.</p>
+    </div>
+    <div class="card">
+      <div class="step-num" style="background:#22c55e">3</div>
+      <h3>Merchant gets paid</h3>
+      <p>The merchant receives funds in their local currency, instantly. From their side, it looks like a normal domestic QR payment. Zero friction.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- API -->
+<section>
+<div class="wrap">
+  <div class="center" style="margin-bottom:48px">
+    <div class="label">The API</div>
+    <h2>One integration. <span class="accent">Every local rail.</span></h2>
+  </div>
+  <div class="card-api">
+    <div style="color:#fff;font-weight:700;font-size:22px;margin-bottom:16px">MekongPay API</div>
+    <p style="color:#a1a1aa;font-size:15px;line-height:1.7;margin-bottom:24px">A single integration to give your users access to domestic QR payment rails across Southeast Asia. Built for fintechs, neobanks, stablecoin wallets, and payment platforms.</p>
+    <div class="feat">✦ Single API, multiple countries</div>
+    <div class="feat">✦ Stablecoin-in, local fiat-out</div>
+    <div class="feat">✦ Full regulatory compliance</div>
+    <div class="feat">✦ Cards, bank accounts, and stablecoins supported</div>
+    <div class="feat">✦ Instant local currency settlement to merchants</div>
+  </div>
+  <div class="code-block">
+    <div><span class="c-purple">const</span> <span class="c-text">payment</span> <span class="c-purple">=</span> <span class="c-text">await mekongpay</span><span class="c-dim">.</span><span class="c-cyan">create</span><span class="c-dim">({</span></div>
+    <div style="padding-left:24px"><span class="c-green">qr_data</span><span class="c-dim">:</span> <span class="c-yellow">scannedQR</span><span class="c-dim">,</span></div>
+    <div style="padding-left:24px"><span class="c-green">source</span><span class="c-dim">:</span> <span class="c-red">"usdc"</span><span class="c-dim">,</span></div>
+    <div style="padding-left:24px"><span class="c-green">amount</span><span class="c-dim">:</span> <span class="c-blue">150.00</span></div>
+    <div><span class="c-dim">});</span></div>
+    <div style="margin-top:8px;color:#52525b">// merchant receives local currency instantly</div>
+  </div>
+</div>
+</section>
+
+<!-- Years on the ground -->
+<section>
+<div class="wrap-sm center">
+  <div class="label">Why us</div>
+  <h2>We spent years on the ground <span class="accent">so you don't have to.</span></h2>
+  <p class="body" style="max-width:600px;margin:0 auto 40px">Accessing domestic payment rails in Southeast Asia means navigating central banks, local banking partnerships, and regulatory frameworks across multiple jurisdictions. We've already done all of it — the relationships, the infrastructure, the compliance. You just plug in.</p>
+  <div class="flex gap-16 justify-center">
+    <div class="card" style="text-align:left">
+      <h3>Full regulatory compliance</h3>
+      <p>Built from the ground up to meet international KYC/AML standards across every market we operate in.</p>
+    </div>
+    <div class="card" style="text-align:left">
+      <h3>Direct banking partnerships</h3>
+      <p>Not a workaround. Not a grey area. Direct integrations with local banking infrastructure and national payment networks.</p>
+    </div>
+    <div class="card" style="text-align:left">
+      <h3>Multi-jurisdiction, one integration</h3>
+      <p>We hold the relationships across multiple countries so your single API call routes through the right rails automatically.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Built for -->
+<section>
+<div class="wrap">
+  <div class="center" style="margin-bottom:48px">
+    <div class="label">Built for</div>
+    <h2>From neobanks to <span class="accent">global platforms.</span></h2>
+  </div>
+  <div class="flex gap-16 justify-center">
+    <div class="card">
+      <div class="card-icon">+</div>
+      <h3>Fintechs and neobanks</h3>
+      <p>Give your users the ability to pay at millions of local merchants across Southeast Asia through their existing accounts.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">+</div>
+      <h3>Stablecoin wallets</h3>
+      <p>The only fully regulated path from stablecoins to local merchant QR payments. USDC in, local fiat out.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">+</div>
+      <h3>Payment platforms</h3>
+      <p>Embed Southeast Asian local QR rails into your existing infrastructure. We handle the regulatory complexity.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Vision -->
+<section>
+<div class="wrap-sm center">
+  <div class="label" style="color:#818cf8">The vision</div>
+  <h2>Southeast Asia is the <span class="accent">starting point.</span></h2>
+  <p class="body" style="margin-bottom:40px">Every country has domestic QR rails — Pix in Brazil, UPI in India, M-Pesa in Kenya. None of them talk to each other. We're building the universal API to connect all of them.</p>
+  <div class="flex gap-12 justify-center">
+    <div class="vision-card">
+      <span class="vision-badge" style="background:#22c55e">Now</span>
+      <span style="font-size:15px;color:#a1a1aa;font-weight:500">Mekong corridor</span>
+    </div>
+    <div class="vision-card">
+      <span class="vision-badge" style="background:#6366f1">Next</span>
+      <span style="font-size:15px;color:#a1a1aa;font-weight:500">Wider ASEAN</span>
+    </div>
+    <div class="vision-card">
+      <span class="vision-badge" style="background:#a78bfa">Then</span>
+      <span style="font-size:15px;color:#a1a1aa;font-weight:500">Global</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Bottom CTA -->
+<section>
+<div class="wrap-xs center">
+  <h2>We're just <span class="accent">getting started.</span></h2>
+  <p class="body" style="margin-bottom:32px">MekongPay is building the payment infrastructure layer that connects local QR rails globally. Register your interest to be among the first to integrate.</p>
+  <a href="#register" class="btn-primary" style="display:inline-block;font-size:16px;padding:14px 32px">Register early interest</a>
+</div>
+</section>
+
+<!-- Footer -->
+<div style="padding:40px 0">
+<div class="wrap divider" style="padding-top:40px">
+  <div class="flex justify-between align-center" style="flex-wrap:wrap;gap:16px">
+    <div class="flex align-center" style="gap:10px">
+      <svg width="36" height="36" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#6366f1"/><path d="M20 76 Q32 40 50 52 Q68 64 80 24" stroke="#fff" stroke-width="4.5" fill="none" stroke-linecap="round"/><circle cx="20" cy="76" r="5" fill="rgba(255,255,255,0.5)"/><circle cx="50" cy="52" r="5" fill="rgba(255,255,255,0.5)"/><circle cx="80" cy="24" r="5" fill="rgba(255,255,255,0.5)"/><line x1="16" y1="84" x2="84" y2="84" stroke="rgba(255,255,255,0.2)" stroke-width="2"/></svg>
+      <span style="font-size:20px;font-weight:600;letter-spacing:-0.5px"><span style="color:#fff">Mekong</span><span style="color:#818cf8">Pay</span></span>
+    </div>
+    <div style="color:#52525b;font-size:13px">QR payment infrastructure for the world.</div>
+  </div>
+</div>
+</div>
+
+<script>
+document.getElementById('register-btn').addEventListener('click', function() {
+  var email = document.getElementById('email-input').value;
+  if (email && email.includes('@')) {
+    document.getElementById('email-input').style.display = 'none';
+    this.style.display = 'none';
+    var msg = document.getElementById('success-msg');
+    msg.style.display = 'block';
+  }
+});
+</script>
+
+</body>
+</html>

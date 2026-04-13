@@ -9,6 +9,10 @@
 <meta property="og:description" content="One API for every QR payment on earth. Cards in, stablecoins in — local QR out.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -289,10 +293,14 @@ section{padding:80px 0}
 document.getElementById('register-btn').addEventListener('click', function() {
   var email = document.getElementById('email-input').value;
   if (email && email.includes('@')) {
+    fetch('https://formspree.io/f/xjgjvrgw', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: email})
+    });
     document.getElementById('email-input').style.display = 'none';
     this.style.display = 'none';
-    var msg = document.getElementById('success-msg');
-    msg.style.display = 'block';
+    document.getElementById('success-msg').style.display = 'block';
   }
 });
 </script>
